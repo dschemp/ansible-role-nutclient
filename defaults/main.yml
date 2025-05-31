@@ -1,0 +1,41 @@
+---
+nutclient_monitors: []
+# nutclient_monitors:
+#   - ups_name: "ups"
+#     hostname: "192.168.0.1"
+#     # port: 5678
+#     # psu_count: 1
+#     username: "monuser"
+#     password: "secret"
+#     # standing: "primary" # or "secondary"
+
+# Give the number of power supplies that must be receiving power to keep
+# this system running.  Most systems have one power supply, so you would
+# put '1' in this field.
+nutclient_min_psu_count: 1
+
+# upsmon runs this command when the system needs to be brought down.
+nutclient_shutdown_command: "/sbin/shutdown -h"
+
+# Polling interval for normal activities, measured in seconds.
+nutclient_polling_interval: 5
+# Polling interval in seconds while UPS on battery.
+nutclient_polling_interval_on_battery: 5
+
+# Interval to wait before declaring a stale ups "dead"
+#
+# Note: nutclient_dead_time should be a multiple of nutclient_polling_interval
+# and nutclient_polling_interval_on_battery.
+# Otherwise you'll have "dead" UPSes simply because upsmon isn't polling
+# them quickly enough.
+# Rule of thumb: take the larger of the two polling intervals, and multiply by 3.
+nutclient_dead_time: "{{ ([nutclient_polling_interval, nutclient_polling_interval_on_battery] | max) * 3 }}"
+
+# last sleep interval before shutting down the system
+nutclient_final_sleep_interval: 5
+
+# replace battery warning time in seconds
+nutclient_replace_battery_warning_interval: 43200 # 12h
+
+# no communications warning time in seconds
+nutclient_no_comms_warning_interval: 300 # 5m

@@ -1,0 +1,9 @@
+---
+- name: "Prepare."
+  hosts: "all"
+  become: true
+  tasks:
+    - name: "Install EPEL repo."
+      when: "ansible_os_family == 'RedHat'"
+      ansible.builtin.import_role:
+        name: "geerlingguy.repo-epel"

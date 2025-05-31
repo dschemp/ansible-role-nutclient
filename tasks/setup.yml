@@ -1,0 +1,13 @@
+---
+- name: "Update package cache (Debian)."
+  when: "ansible_os_family == 'Debian'"
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: "Install packages."
+  become: true
+  ansible.builtin.package:
+    name: "{{ nutclient_packages }}"
+    state: "present"

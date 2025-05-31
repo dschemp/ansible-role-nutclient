@@ -1,0 +1,10 @@
+---
+nutclient_packages:
+  - "nut-client"
+
+nutclient_conf_dir: "/etc/nut"
+
+nutclient_user: "nut"
+nutclient_group: "nut"
+
+nutclient_daemon_name: "nut-client"

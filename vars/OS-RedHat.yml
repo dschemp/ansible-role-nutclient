@@ -1,0 +1,4 @@
+---
+nutclient_conf_dir: "/etc/ups"
+
+nutclient_daemon_name: "nut-monitor"

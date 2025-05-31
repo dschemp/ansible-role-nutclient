@@ -1,0 +1,19 @@
+---
+- name: "Import variables tasks."
+  ansible.builtin.import_tasks: "set_vars.yml"
+
+- name: "Import installation tasks."
+  ansible.builtin.import_tasks: "setup.yml"
+
+- name: "Import configuration tasks."
+  ansible.builtin.import_tasks: "configure.yml"
+
+- name: "Start and enable nut-client."
+  become: true
+  ansible.builtin.systemd_service:
+    name: "{{ nutclient_daemon_name }}"
+    enabled: true
+    state: "started"
+
+- name: "Flush handlers."
+  ansible.builtin.meta: "flush_handlers"

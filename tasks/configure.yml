@@ -1,0 +1,14 @@
+---
+- name: "Configure NUT."
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "{{ [nutclient_conf_dir, item] | path_join }}"
+    owner: "root"
+    group: "{{ nutclient_group }}"
+    mode: "0640"
+    backup: true
+  loop:
+    - "nut.conf"
+    - "upsmon.conf"
+  notify: "Restart {{ role_name }}."
